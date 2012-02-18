@@ -22,4 +22,52 @@
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<!-- must be run with a JDK (not a JRE) and is started with mvn package 
+					webstart:jnlp -->
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>webstart-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jnlp</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<excludeTransitive>false</excludeTransitive>
+					<jnlp>
+						<outputFile>dict.jnlp</outputFile>
+						<mainClass>com.tyrcho.dictionary.view.DictionaryFrame</mainClass>
+					</jnlp>
+					<sign>
+						<keystore>tyrcho</keystore>
+						<keypass>password</keypass>
+						<storepass>password</storepass>
+						<alias>tyrcho</alias>
+						<verify>true</verify>
+						<dnameCn>Michel Daviot</dnameCn>
+						<dnameOu></dnameOu>
+						<dnameO></dnameO>
+						<dnameL>Lille</dnameL>
+						<dnameSt>France</dnameSt>
+						<dnameC>FR</dnameC>
+						<validity>3650</validity>
+						<keystoreConfig>
+							<gen>true</gen>
+						</keystoreConfig>
+					</sign>
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<organization>
+		<name>daviot.info</name>
+	</organization>
+	<url>file:///D:\dev\java\workspace\Dictionary\target</url>
 </project> 
