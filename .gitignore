@@ -1,0 +1,8 @@
+classes
+lib
+dist
+*.jar
+
+.svn
+*.sw?
+*~

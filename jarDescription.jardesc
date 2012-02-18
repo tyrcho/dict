@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+<jar path="C:/Documents and Settings/tyrcho/Bureau/dictionary.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/Dictionary/jarDescription.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" useSourceFolders="false"/>
+<manifest generateManifest="false" mainClassHandleIdentifier="=Dictionary/src&lt;com.tyrcho.dictionary.view{DictionaryFrame.java[DictionaryFrame" manifestLocation="/Dictionary/META-INF/Manifest.MF" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
+<sealing sealJar="false">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+<javaElement handleIdentifier="=Common Tools/src"/>
+<javaElement handleIdentifier="=Dictionary/src"/>
+</selectedElements>
+</jardesc>
