@@ -24,6 +24,37 @@
 	</dependencies>
 	<build>
 		<plugins>
+<!-- 			<plugin> -->
+<!-- 				<groupId>com.pyx4me</groupId> -->
+<!-- 				<artifactId>proguard-maven-plugin</artifactId> -->
+<!-- 				<version>2.0.4</version> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<phase>package</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>proguard</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 				<configuration> -->
+<!-- 					<assembly> -->
+<!-- 						<inclusions> -->
+<!-- 							<inclusion> -->
+<!-- 								<groupId>info.daviot</groupId> -->
+<!-- 								<artifactId>JavaCommonTools</artifactId> -->
+<!-- 							</inclusion> -->
+<!-- 						</inclusions> -->
+<!-- 					</assembly> -->
+<!-- 					<options> -->
+<!-- 						<option>-allowaccessmodification</option> -->
+<!-- 						<option>-dontskipnonpubliclibraryclasses</option> -->
+<!-- 						<option>-keep class ${main.class} { *; }</option> -->
+<!-- 					</options> -->
+<!-- 					<libs> -->
+<!-- 						<lib>C:/Program Files (x86)/Java/jre6/lib/rt.jar</lib> -->
+<!-- 					</libs> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
 			<plugin>
 				<!-- must be run with a JDK (not a JRE) and is started with mvn package 
 					webstart:jnlp -->
@@ -39,10 +70,10 @@
 					</execution>
 				</executions>
 				<configuration>
-					<excludeTransitive>false</excludeTransitive>
+					<excludeTransitive>true</excludeTransitive>
 					<jnlp>
 						<outputFile>dict.jnlp</outputFile>
-						<mainClass>com.tyrcho.dictionary.view.DictionaryFrame</mainClass>
+						<mainClass>${main.class}</mainClass>
 					</jnlp>
 					<sign>
 						<keystore>tyrcho</keystore>
@@ -66,6 +97,9 @@
 			</plugin>
 		</plugins>
 	</build>
+	<properties>
+		<main.class>com.tyrcho.dictionary.view.DictionaryFrame</main.class>
+	</properties>
 	<organization>
 		<name>daviot.info</name>
 	</organization>
