@@ -16,6 +16,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URI;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -731,7 +732,7 @@ public class DictionaryFrame extends JFrame {
 			InstantiationException, IllegalAccessException,
 			UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		DictionaryFrame frame = new DictionaryFrame("Franeais", "Espaeol");
+		DictionaryFrame frame = new DictionaryFrame("Français", "Español");
 		// frame.addEntry("hola", "salut, bonjour", "Hola seeor");
 		frame.pack();
 		try {
@@ -807,17 +808,42 @@ public class DictionaryFrame extends JFrame {
 		}
 	}
 
-	public void newDictionaryClicked() {
-		if (!isSaved("Attention aux donnees en cours",
-				"Sauver les donnees en cours ?"))
-			return;
+	private String selectLanguage(String label, String def) {
+		String[] isoLanguages = Locale.getISOLanguages();
+		Language[] locales = new Language[isoLanguages.length];
+		for (int i = 0; i < isoLanguages.length; i++) {
+			locales[i] = new Language(isoLanguages[i]);
+		}
+		Arrays.sort(locales);
+		Language selected = (Language) JOptionPane.showInputDialog(this, label,
+				null, JOptionPane.INFORMATION_MESSAGE, null, locales,
+				Locale.forLanguageTag(def));
+		return selected.code;
+	}
 
-		String firstLanguage = (String) JOptionPane.showInputDialog(this,
-				"Premiere langue ?", null, JOptionPane.INFORMATION_MESSAGE,
-				null, Locale.getISOLanguages(), "fr");
-		String secondLanguage = (String) JOptionPane.showInputDialog(this,
-				"Deuxieme langue ?", null, JOptionPane.INFORMATION_MESSAGE,
-				null, Locale.getISOLanguages(), "en");
+	static class Language implements Comparable<Language> {
+		private String code;
+
+		public Language(String code) {
+			this.code = code;
+		}
+
+		@Override
+		public String toString() {
+			return Locale.forLanguageTag(code).getDisplayLanguage();
+		}
+
+		public int compareTo(Language o) {
+			return toString().compareTo(o.toString());
+		}
+	}
+
+	public void newDictionaryClicked() {
+		if (!isSaved("Attention aux données en cours",
+				"Sauver les données en cours ?"))
+			return;
+		String firstLanguage = selectLanguage("Première langue ?", "fr");
+		String secondLanguage = selectLanguage("Deuxième langue ?", "en");
 		dictionary = new TwoWayDictionary(firstLanguage, secondLanguage);
 		updateFrame(null, dictionary);
 	}
