@@ -28,7 +28,7 @@ public class XstreamDictionaryFactory implements DictionnaryFactory {
 		}
 	}
 
-	// Renvoie un objet TwoWayDictionary à partir d'un fichier XML
+	// Renvoie un objet TwoWayDictionary e partir d'un fichier XML
 	public TwoWayDictionary load() throws DictionnaryFactoryException {
 		try {
 			Reader reader = new InputStreamReader(

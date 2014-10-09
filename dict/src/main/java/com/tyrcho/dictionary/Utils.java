@@ -22,7 +22,7 @@ public class Utils {
 		return builder.toString();
 	}
 
-	// comparaison sans les caractères ignorés
+	// comparaison sans les caracteres ignores
 	public static boolean simpleCompare(String s1, String s2,
 			String ignoredChars) {
 		char[] c1 = s1.toCharArray();

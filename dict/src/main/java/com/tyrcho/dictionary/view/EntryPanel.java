@@ -55,9 +55,9 @@ public class EntryPanel extends JPanel {
         inputFields.put(TRANSLATIONS_FIELD,translationsTextField);
         inputFieldsGroup=new DefaultInputFieldGroup(inputFields);
         fieldsValidator=new GroupValidator();
-        fieldsValidator.putValidator(WORD_FIELD, new NotEmptyValidator("Le mot doit être rempli"));
+        fieldsValidator.putValidator(WORD_FIELD, new NotEmptyValidator("Le mot doit etre rempli"));
         fieldsValidator.putValidator(WORD_FIELD, new PatternValidator("[^,]+", "Le mot ne doit pas contenir de virgule", false));
-        fieldsValidator.putValidator(TRANSLATIONS_FIELD, new NotEmptyValidator("La traduction doit être remplie"));
+        fieldsValidator.putValidator(TRANSLATIONS_FIELD, new NotEmptyValidator("La traduction doit etre remplie"));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(wordLabel);
         add(wordTextField);

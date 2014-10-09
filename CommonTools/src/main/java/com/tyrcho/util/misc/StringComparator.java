@@ -3,8 +3,8 @@ package com.tyrcho.util.misc;
 import java.util.Comparator;
 
 /**
- * Compare 2 chaines en fonction d'un parametre qui définit l'ordre
- * alphabétique.
+ * Compare 2 chaines en fonction d'un parametre qui definit l'ordre
+ * alphabetique.
  */
 public class StringComparator implements Comparator<String> {
 	private String languageOrder;
@@ -20,17 +20,19 @@ public class StringComparator implements Comparator<String> {
 			char c2 = o2.charAt(i);
 			int i1 = languageOrder.indexOf(c1);
 			int i2 = languageOrder.indexOf(c2);
-			if (i1 >= 0 && i2 >= 0) {//both in language
+			if (i1 >= 0 && i2 >= 0) {// both in language
 				if (i1 != i2) {
 					return i1 - i2;
 				}
-			} else if (i1<0 && i2 <0) {//none in language
-				if (c1!=c2) { return c1-c2;}
+			} else if (i1 < 0 && i2 < 0) {// none in language
+				if (c1 != c2) {
+					return c1 - c2;
+				}
 			} else {
-				return i1>0 ? -1 : 1; //language comes first
-			}			
+				return i1 > 0 ? -1 : 1; // language comes first
+			}
 		}
-		return o1.length()-o2.length(); // short string first	
+		return o1.length() - o2.length(); // short string first
 	}
 
 }

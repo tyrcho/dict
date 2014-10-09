@@ -24,7 +24,7 @@ public class Question {
 		setDictionaryEntry(dictionaryEntry);
 	}
 
-	// Redéfinition de la méthode de l'objet Object
+	// Redefinition de la methode de l'objet Object
 	public String toString() {
 		return "Donnez la traduction de : " + word;
 	}
@@ -34,7 +34,7 @@ public class Question {
 		this.inputTranslation = inputTranslation;
 	}
 
-	// Test si la traduction proposée par l'utilisateur est égale à une des
+	// Test si la traduction proposee par l'utilisateur est egale e une des
 	// traductions possibles
 	public boolean isAnswerValid() {
 		for (String translation : dictionaryEntry.translations()) {

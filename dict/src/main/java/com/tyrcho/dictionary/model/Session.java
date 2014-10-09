@@ -136,7 +136,7 @@ public class Session {
 		parameters.setFirstLanguage(!parameters.isFirstLanguage());
 	}
 
-	// Mise à jour du score de la session
+	// Mise e jour du score de la session
 	public void updateScore() {
 		score = score + 1;
 	}
@@ -145,12 +145,12 @@ public class Session {
 		score = 0;
 	}
 
-	// Récupération du score de la session
+	// Recuperation du score de la session
 	public String getScore() {
 		return score + "/" + questionCount;
 	}
 
-	// Récupération de l'itérateur de la session
+	// Recuperation de l'iterateur de la session
 	public Iterator<Question> iterator() {
 		return new SessionIterator();
 	}

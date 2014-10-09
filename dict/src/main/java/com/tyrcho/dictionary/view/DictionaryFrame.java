@@ -266,13 +266,13 @@ public class DictionaryFrame extends JFrame {
 				}
 				// String otherChangeLanguage= "Autre exercice
 				// ("+(session.isFirstLanguage()?secondLanguageName:firstLanguageName)+")";
-				String[] options = { "Recommencer (m�mes mots)",
+				String[] options = { "Recommencer (memes mots)",
 						"Autre exercice", "Changer de langue ", "Retour",
-						"M�me type d'exercice" };
+						"Meme type d'exercice" };
 				String message = "Votre score est de " + score + ".\n "
 						+ frame.getErrors() + "\nEt maintenant ?";
 				int choice = JOptionPane
-						.showOptionDialog(frame, message, "Session termin�e",
+						.showOptionDialog(frame, message, "Session terminee",
 								JOptionPane.CANCEL_OPTION,
 								JOptionPane.QUESTION_MESSAGE, null, options,
 								options[4]);
@@ -309,8 +309,8 @@ public class DictionaryFrame extends JFrame {
 	}
 
 	private void loadClicked() {
-		if (!isSaved("Attention aux donn�es en cours",
-				"Sauver les donn�es en cours ?"))
+		if (!isSaved("Attention aux donnees en cours",
+				"Sauver les donnees en cours ?"))
 			return;
 		final JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileFilter(filter);
@@ -352,12 +352,12 @@ public class DictionaryFrame extends JFrame {
 			updateFrame(file, dictionary);
 		} catch (RuntimeException e) {
 			new ErrorMessageDialog(this, "Fichier non valide",
-					"Ce fichier n'a pas pu �tre lu " + file.getAbsolutePath(),
+					"Ce fichier n'a pas pu etre lu " + file.getAbsolutePath(),
 					e).setVisible(true);
 			updateFrame(file, new TwoWayDictionary("", ""));
 		} catch (DictionnaryFactoryException e) {
 			new ErrorMessageDialog(this, "Fichier non valide",
-					"Ce fichier n'a pas pu �tre lu " + file.getAbsolutePath(),
+					"Ce fichier n'a pas pu etre lu " + file.getAbsolutePath(),
 					e).setVisible(true);
 			updateFrame(file, new TwoWayDictionary("", ""));
 		}
@@ -372,11 +372,11 @@ public class DictionaryFrame extends JFrame {
 			updateFrame(currentFile, dictionary);
 		} catch (RuntimeException e) {
 			new ErrorMessageDialog(this, "Fichier non valide",
-					"Ce fichier n'a pas pu �tre lu " + file.getAbsolutePath(),
+					"Ce fichier n'a pas pu etre lu " + file.getAbsolutePath(),
 					e).setVisible(true);
 		} catch (DictionnaryFactoryException e) {
 			new ErrorMessageDialog(this, "Fichier non valide",
-					"Ce fichier n'a pas pu �tre lu " + file.getAbsolutePath(),
+					"Ce fichier n'a pas pu etre lu " + file.getAbsolutePath(),
 					e).setVisible(true);
 		}
 	}
@@ -459,7 +459,7 @@ public class DictionaryFrame extends JFrame {
 			updateStatus();
 			JOptionPane.showMessageDialog(this,
 					"Le fichier " + file.getAbsolutePath()
-							+ " a �t� enregistr�.");
+							+ " a ete enregistre.");
 			return true;
 		} catch (DictionnaryFactoryException e) {
 			showSaveError(file, e);
@@ -471,13 +471,13 @@ public class DictionaryFrame extends JFrame {
 		new ErrorMessageDialog(
 				this,
 				"Impossible d'enregistrer",
-				"Impossible d'�crire dans le fichier " + file.getAbsolutePath(),
+				"Impossible d'ecrire dans le fichier " + file.getAbsolutePath(),
 				e).setVisible(true);
 	}
 
 	private void updateStatus() {
 		statusBar.setText((currentFile == null ? "" : currentFile.getName())
-				+ " " + (isModified() ? "modifi�" : ""));
+				+ " " + (isModified() ? "modifie" : ""));
 	}
 
 	private boolean isSaved(String title, String message) {
@@ -623,7 +623,7 @@ public class DictionaryFrame extends JFrame {
 			if (entryPanel.isModified() && lastSelectedWord != null
 					&& !selectedWord.equals(lastSelectedWord)) {
 				int response = JOptionPane.showConfirmDialog(this,
-						"Les donn�es ont �t� modifi�es",
+						"Les donnees ont ete modifiees",
 						"Conserver les modifications ?",
 						JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE);
@@ -731,13 +731,13 @@ public class DictionaryFrame extends JFrame {
 			InstantiationException, IllegalAccessException,
 			UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		DictionaryFrame frame = new DictionaryFrame("Fran�ais", "Espa�ol");
-		// frame.addEntry("hola", "salut, bonjour", "Hola se�or");
+		DictionaryFrame frame = new DictionaryFrame("Franeais", "Espaeol");
+		// frame.addEntry("hola", "salut, bonjour", "Hola seeor");
 		frame.pack();
 		try {
 			frame.load(new File(readPropertiesFile()));
 		} catch (IOException e) {
-			System.out.println("Premier d�marrage, le fichier "
+			System.out.println("Premier demarrage, le fichier "
 					+ propertiesFileName + " n'existe pas encore");
 			frame.setVisible(true);
 		}
@@ -808,15 +808,15 @@ public class DictionaryFrame extends JFrame {
 	}
 
 	public void newDictionaryClicked() {
-		if (!isSaved("Attention aux donn�es en cours",
-				"Sauver les donn�es en cours ?"))
+		if (!isSaved("Attention aux donnees en cours",
+				"Sauver les donnees en cours ?"))
 			return;
 
 		String firstLanguage = (String) JOptionPane.showInputDialog(this,
-				"Premi�re langue ?", null, JOptionPane.INFORMATION_MESSAGE,
+				"Premiere langue ?", null, JOptionPane.INFORMATION_MESSAGE,
 				null, Locale.getISOLanguages(), "fr");
 		String secondLanguage = (String) JOptionPane.showInputDialog(this,
-				"Deuxi�me langue ?", null, JOptionPane.INFORMATION_MESSAGE,
+				"Deuxieme langue ?", null, JOptionPane.INFORMATION_MESSAGE,
 				null, Locale.getISOLanguages(), "en");
 		dictionary = new TwoWayDictionary(firstLanguage, secondLanguage);
 		updateFrame(null, dictionary);

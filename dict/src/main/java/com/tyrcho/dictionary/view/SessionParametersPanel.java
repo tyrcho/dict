@@ -62,7 +62,7 @@ public class SessionParametersPanel extends JPanel {
 
 	private Component buildPercentsFields() {
 		JPanel jPanel = new JPanel(new SpringLayout());
-		jPanel.add(new JLabel("% Aléatoire"));
+		jPanel.add(new JLabel("% Aleatoire"));
 		jPanel.add(randomCountField = new TextFieldWithSlider(0, 100, 30));
 		jPanel.add(new JLabel("Nombre de questions"));
 		jPanel.add(questionCountField = new TextFieldWithSlider(0,
@@ -114,7 +114,7 @@ public class SessionParametersPanel extends JPanel {
 			panel = new SessionParametersPanel(dictionary);
 		}
 		int action = JOptionPane.showConfirmDialog(frame, panel,
-				"Paramètres de session", JOptionPane.OK_CANCEL_OPTION);
+				"Parametres de session", JOptionPane.OK_CANCEL_OPTION);
 		if (action == JOptionPane.OK_OPTION) {
 			return panel.getSessionParameters();
 		} else {

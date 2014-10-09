@@ -7,7 +7,7 @@ import junit.framework.TestCase;
  */
 public class TwoWayDictionnaryTest extends TestCase {
 
-    private static final String SALUT_A_TOUS = "Salut à tous";
+    private static final String SALUT_A_TOUS = "Salut e tous";
     private static final String HELLO_WORLD = "Hello, world";
     private static final String SALUT = "salut";
     private static final String HELLO = "hello";
