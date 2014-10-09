@@ -9,13 +9,25 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.2</version>
+			<version>1.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>info.daviot</groupId>
 			<artifactId>JavaCommonTools</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!--dependency>
+			<groupId>jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>2.0.5</version>
+		</dependency-->
 	</dependencies>
 	<build>
 		<plugins>
@@ -70,15 +82,15 @@
 								<minVersion>1.6.0</minVersion>
 							</jre>
 							<versionInfo>
-								<fileVersion>${project.longVersion}</fileVersion>
+								<fileVersion>${project.version}.0</fileVersion>
 								<txtFileVersion>${project.version}</txtFileVersion>
-								<fileDescription>${product.name}</fileDescription>
-								<productVersion>${project.longVersion}</productVersion>
+								<fileDescription>Dictionary helper</fileDescription>
+								<productVersion>${project.version}.0</productVersion>
 								<txtProductVersion>${project.version}</txtProductVersion>
-								<productName>${product.name}</productName>
-								<copyright>See https://github.com/HearthStats/HearthStats.net-Uploader for license</copyright>
-								<internalName>HearthStats</internalName>
-								<originalFilename>HearthStats.exe</originalFilename>
+								<copyright>copyright </copyright>
+								<productName>${project.name}</productName>
+								<internalName>Dict</internalName>
+								<originalFilename>Dict.exe</originalFilename>
 							</versionInfo>
 						</configuration>
 					</execution>
