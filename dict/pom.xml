@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>info.daviot</groupId>
@@ -50,7 +51,8 @@
 								</excludes>
 							</artifactSet>
 							<transformers>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>${main.class}</mainClass>
 								</transformer>
 							</transformers>
@@ -58,46 +60,54 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>com.akathist.maven.plugins.launch4j</groupId>
-				<artifactId>launch4j-maven-plugin</artifactId>
-				<version>1.5.2</version>
-				<executions>
-					<execution>
-						<id>l4j-clui</id>
-						<phase>package</phase>
-						<goals>
-							<goal>launch4j</goal>
-						</goals>
-						<configuration>
-							<headerType>gui</headerType>
-							<outfile>target/Dict.exe</outfile>
-							<classPath>
-								<mainClass>${main.class}</mainClass>
-								<addDependencies>true</addDependencies>
-								<preCp>anything</preCp>
-							</classPath>
-							<jre>
-								<minVersion>1.6.0</minVersion>
-							</jre>
-							<versionInfo>
-								<fileVersion>${long.version}</fileVersion>
-								<txtFileVersion>${published.version}</txtFileVersion>
-								<fileDescription>Dictionary helper</fileDescription>
-								<productVersion>${long.version}</productVersion>
-								<txtProductVersion>${published.version}</txtProductVersion>
-								<copyright>copyright </copyright>
-								<productName>${project.name}</productName>
-								<internalName>Dict</internalName>
-								<originalFilename>Dict.exe</originalFilename>
-							</versionInfo>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>windows</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.akathist.maven.plugins.launch4j</groupId>
+						<artifactId>launch4j-maven-plugin</artifactId>
+						<version>1.5.2</version>
+						<executions>
+							<execution>
+								<id>l4j-clui</id>
+								<phase>package</phase>
+								<goals>
+									<goal>launch4j</goal>
+								</goals>
+								<configuration>
+									<headerType>gui</headerType>
+									<outfile>target/Dict.exe</outfile>
+									<classPath>
+										<mainClass>${main.class}</mainClass>
+										<addDependencies>true</addDependencies>
+										<preCp>anything</preCp>
+									</classPath>
+									<jre>
+										<minVersion>1.6.0</minVersion>
+									</jre>
+									<versionInfo>
+										<fileVersion>${long.version}</fileVersion>
+										<txtFileVersion>${published.version}</txtFileVersion>
+										<fileDescription>Dictionary helper</fileDescription>
+										<productVersion>${long.version}</productVersion>
+										<txtProductVersion>${published.version}</txtProductVersion>
+										<copyright>copyright </copyright>
+										<productName>${project.name}</productName>
+										<internalName>Dict</internalName>
+										<originalFilename>Dict.exe</originalFilename>
+									</versionInfo>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<properties>
 		<main.class>com.tyrcho.dictionary.view.DictionaryFrame</main.class>
 	</properties>
