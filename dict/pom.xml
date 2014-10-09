@@ -1,10 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>info.daviot</groupId>
-	<artifactId>Dictionary</artifactId>
-	<version>1.0.0</version>
-	<name>Dictionary</name>
+	<parent>
+		<groupId>info.daviot</groupId>
+		<version>1.1.0-SNAPSHOT</version>
+		<artifactId>dict-parent</artifactId>
+	</parent>
+	<name>Dict</name>
+	<artifactId>dict</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
@@ -13,8 +16,8 @@
 		</dependency>
 		<dependency>
 			<groupId>info.daviot</groupId>
-			<artifactId>JavaCommonTools</artifactId>
-			<version>1.0.0</version>
+			<artifactId>common-tools</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -23,11 +26,8 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--dependency>
-			<groupId>jasperreports</groupId>
-			<artifactId>jasperreports</artifactId>
-			<version>2.0.5</version>
-		</dependency-->
+		<!--dependency> <groupId>jasperreports</groupId> <artifactId>jasperreports</artifactId> 
+			<version>2.0.5</version> </dependency -->
 	</dependencies>
 	<build>
 		<plugins>
@@ -51,7 +51,8 @@
 								</excludes>
 							</artifactSet>
 							<transformers>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>${main.class}</mainClass>
 								</transformer>
 							</transformers>
