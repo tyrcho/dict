@@ -1,8 +1,8 @@
 language: java
 
 jdk:
-  - oraclejdk6
-
+  - oraclejdk7
+  
 notifications:
   email:
     - tyrcho@tyrcho.com
