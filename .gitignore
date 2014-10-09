@@ -11,4 +11,6 @@ target
 .project
 .settings/
 .classpath
+
 release.properties
+pom.xml.releaseBackup
