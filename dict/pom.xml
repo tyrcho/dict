@@ -83,11 +83,11 @@
 								<minVersion>1.6.0</minVersion>
 							</jre>
 							<versionInfo>
-								<fileVersion>${project.version}.0</fileVersion>
-								<txtFileVersion>${project.version}</txtFileVersion>
+								<fileVersion>${long.version}</fileVersion>
+								<txtFileVersion>${published.version}</txtFileVersion>
 								<fileDescription>Dictionary helper</fileDescription>
-								<productVersion>${project.version}.0</productVersion>
-								<txtProductVersion>${project.version}</txtProductVersion>
+								<productVersion>${long.version}</productVersion>
+								<txtProductVersion>${published.version}</txtProductVersion>
 								<copyright>copyright </copyright>
 								<productName>${project.name}</productName>
 								<internalName>Dict</internalName>
