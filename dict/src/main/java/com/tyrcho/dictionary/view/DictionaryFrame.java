@@ -12,11 +12,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.net.URI;
-import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -57,6 +55,7 @@ import com.tyrcho.dictionary.model.TwoWayDictionary;
 import com.tyrcho.dictionary.model.factory.DictionnaryFactory;
 import com.tyrcho.dictionary.model.factory.DictionnaryFactoryException;
 import com.tyrcho.dictionary.model.factory.XstreamDictionaryFactory;
+import com.tyrcho.dictionary.util.ExcelExporter;
 import com.tyrcho.gui.component.ErrorMessageDialog;
 import com.tyrcho.gui.toolkit.RadioButtonGroup;
 
@@ -120,12 +119,6 @@ public class DictionaryFrame extends JFrame {
 		}
 	};
 
-	private Action printAction = new AbstractAction("Imprimer") {
-		public void actionPerformed(ActionEvent e) {
-			print();
-		}
-	};
-
 	private Action saveAsAction = new AbstractAction("Enregistrer sous") {
 		public void actionPerformed(ActionEvent e) {
 			saveAsClicked();
@@ -181,51 +174,6 @@ public class DictionaryFrame extends JFrame {
 			runSession(session);
 			setModified(true);
 		}
-	}
-
-	private void print() {
-		// Boolean firstLanguage = popupChooseLanguage();
-		// if (firstLanguage != null) {
-		// try {
-		// JasperReport report = JasperCompileManager
-		// .compileReport(getClass().getClassLoader()
-		// .getResourceAsStream("dictionnaire.jrxml"));
-		// Collection<Map<String, String>> data = new ArrayList<Map<String,
-		// String>>();
-		// List<String> entries = dictionary
-		// .getSortedEntries(firstLanguage);
-		// for (String word : entries) {
-		// Map<String, String> map = new HashMap<String, String>();
-		// map.put("a", word);
-		// DictionaryEntry entry = dictionary.getEntry(word,
-		// firstLanguage);
-		// Collection<String> translations = entry.translations();
-		// StringBuffer buffer = new StringBuffer();
-		// for (Iterator<String> i = translations.iterator(); i
-		// .hasNext();) {
-		// buffer.append(i.next());
-		// if (i.hasNext()) {
-		// buffer.append(", ");
-		// }
-		// }
-		// map.put("b", buffer.toString());
-		// map.put("c", entry.explaination());
-		// data.add(map);
-		// }
-		// HashMap<String, String> parameters = new HashMap<String, String>();
-		// parameters.put("LANGAGE1", firstLanguage ? firstLanguageName
-		// : secondLanguageName);
-		// parameters.put("LANGAGE2", firstLanguage ? secondLanguageName
-		// : firstLanguageName);
-		// JasperPrint print = JasperFillManager.fillReport(report,
-		// parameters, new JRMapCollectionDataSource(data));
-		// JasperViewer.viewReport(print, false);
-		// } catch (JRException e) {
-		// JOptionPane.showMessageDialog(this, "Erreur Jasper Print"
-		// + e.getMessage());
-		// e.printStackTrace();
-		// }
-		// }
 	}
 
 	private Boolean popupChooseLanguage() {
@@ -389,7 +337,7 @@ public class DictionaryFrame extends JFrame {
 			if (JFileChooser.APPROVE_OPTION == fileChooser.showSaveDialog(this)) {
 				File file = fileChooser.getSelectedFile();
 				if (!(file.getName().indexOf('.') > 0)) {
-					file = new File(file.getAbsolutePath() + ".csv");
+					file = new File(file.getAbsolutePath() + ".xls");
 				}
 				if (!file.exists()
 						|| JOptionPane.YES_OPTION == JOptionPane
@@ -405,23 +353,31 @@ public class DictionaryFrame extends JFrame {
 
 	private void export(File file, boolean firstLanguage) {
 		try {
-			Writer fileWriter = new OutputStreamWriter(new FileOutputStream(
-					file), Charset.forName("UTF-8"));
-			for (String e : dictionary.getSortedEntries(firstLanguage)) {
-				fileWriter.append(e + ";");
-				DictionaryEntry entry = dictionary.getEntry(e, firstLanguage);
-				for (Iterator<String> i = entry.translations().iterator(); i
-						.hasNext();) {
-					fileWriter.append(i.next());
-					if (i.hasNext()) {
-						fileWriter.append(",");
+			List<String> entries = dictionary.getSortedEntries(firstLanguage);
+			String[][] data = new String[entries.size()][3];
+			int i = 0;
+			for (String word : entries) {
+				String[] line = data[i++];
+				line[0] = word;
+				DictionaryEntry entry = dictionary
+						.getEntry(word, firstLanguage);
+				Collection<String> translations = entry.translations();
+				StringBuffer buffer = new StringBuffer();
+				for (Iterator<String> t = translations.iterator(); t.hasNext();) {
+					buffer.append(t.next());
+					if (t.hasNext()) {
+						buffer.append(", ");
 					}
 				}
-				fileWriter.append(String.format(";%s;%s/%s%n", entry
-						.explaination().replaceAll("\r|\n", ""), entry
-						.goodAnswers(), entry.getTotalAnswers()));
+				line[1] = buffer.toString();
+				line[2] = entry.explaination();
 			}
-			fileWriter.close();
+			String lang1 = firstLanguage ? firstLanguageName
+					: secondLanguageName;
+			String lang2 = firstLanguage ? secondLanguageName
+					: firstLanguageName;
+			String[] titles = { lang1, lang2, "explainations" };
+			ExcelExporter.export(titles, data, file);
 		} catch (IOException e) {
 			showSaveError(file, e);
 		}
@@ -551,12 +507,10 @@ public class DictionaryFrame extends JFrame {
 		menuBar.add(new JButton(saveAction));
 		menuBar.add(new JButton(saveAsAction));
 		menuBar.add(new JButton(importAction));
-		menuBar.add(new JButton(exportAction));
 		menuBar.add(Box.createGlue());
 		menuBar.add(new JButton(trainingAction));
 		menuBar.add(Box.createGlue());
-		menuBar.add(new JButton(printAction));
-		menuBar.add(Box.createGlue());
+		menuBar.add(new JButton(exportAction));
 		setJMenuBar(menuBar);
 	}
 

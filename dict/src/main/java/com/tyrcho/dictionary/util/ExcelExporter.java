@@ -1,5 +1,6 @@
 package com.tyrcho.dictionary.util;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,8 +20,9 @@ public final class ExcelExporter {
 	private ExcelExporter() {
 	}
 
-	public static void export(String[] titles, Object[][] data, int[] colWidths)
+	public static void export(String[] titles, String[][] data, File file)
 			throws IOException {
+		int[] colWidths = { 20, 20, 80 };
 
 		Workbook wb = new HSSFWorkbook();
 
@@ -47,7 +49,7 @@ public final class ExcelExporter {
 			Row row = sheet.createRow(rownum++);
 			for (int j = 0; j < titles.length; j++) {
 				Cell cell = row.createCell(j);
-				cell.setCellStyle(styles.get("cell"));
+				cell.setCellStyle(styles.get(j == 1 ? "large" : "cell"));
 			}
 		}
 
@@ -55,13 +57,8 @@ public final class ExcelExporter {
 		for (int i = 0; i < data.length; i++) {
 			Row row = sheet.getRow(2 + i);
 			for (int j = 0; j < data[i].length; j++) {
-				if (data[i][j] == null)
-					continue;
-
-				if (data[i][j] instanceof String) {
-					row.getCell(j).setCellValue((String) data[i][j]);
-				} else {
-					row.getCell(j).setCellValue((Double) data[i][j]);
+				if (data[i][j] != null) {
+					row.getCell(j).setCellValue(data[i][j]);
 				}
 			}
 		}
@@ -73,7 +70,6 @@ public final class ExcelExporter {
 		}
 
 		// Write the output to a file
-		String file = "timesheet.xls";
 		FileOutputStream out = new FileOutputStream(file);
 		wb.write(out);
 		out.close();
@@ -99,17 +95,15 @@ public final class ExcelExporter {
 		styles.put("header", style);
 
 		style = wb.createCellStyle();
-		style.setAlignment(CellStyle.ALIGN_CENTER);
 		style.setWrapText(true);
-		style.setBorderRight(CellStyle.BORDER_THIN);
-		style.setRightBorderColor(IndexedColors.BLACK.getIndex());
-		style.setBorderLeft(CellStyle.BORDER_THIN);
-		style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
-		style.setBorderTop(CellStyle.BORDER_THIN);
-		style.setTopBorderColor(IndexedColors.BLACK.getIndex());
-		style.setBorderBottom(CellStyle.BORDER_THIN);
-		style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
 		styles.put("cell", style);
+
+		style = wb.createCellStyle();
+		style.setWrapText(true);
+		Font largeFont = wb.createFont();
+		largeFont.setFontHeightInPoints((short) 24);
+		style.setFont(largeFont);
+		styles.put("large", style);
 
 		return styles;
 	}
