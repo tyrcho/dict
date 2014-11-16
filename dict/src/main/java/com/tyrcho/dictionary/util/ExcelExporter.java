@@ -20,15 +20,18 @@ public final class ExcelExporter {
 	private ExcelExporter() {
 	}
 
-	public static void export(String[] titles, String[][] data, File file)
+  public static void export(String lang1, String lang2, String[][] data, File file)
 			throws IOException {
+
+    String[] titles = { lang1, lang2, "comments" };
+
 		int[] colWidths = { 20, 20, 80 };
 
 		Workbook wb = new HSSFWorkbook();
 
 		Map<String, CellStyle> styles = createStyles(wb);
 
-		Sheet sheet = wb.createSheet("Timesheet");
+    Sheet sheet = wb.createSheet(lang1 + " to " + lang2);
 		PrintSetup printSetup = sheet.getPrintSetup();
 		printSetup.setLandscape(true);
 		sheet.setFitToPage(true);
