@@ -7,7 +7,7 @@
 	<groupId>info.daviot</groupId>
 	<artifactId>dict-parent</artifactId>
 	<name>Dict</name>
-	<version>1.1.1-SNAPSHOT</version>
+	<version>1.2</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -20,7 +20,7 @@
 	<scm>
 		<connection>scm:git:https://github.com/tyrcho/dict.git</connection>
 		<developerConnection>scm:git:https://github.com/tyrcho/dict.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>v1.2</tag>
 	</scm>
 
 	<modules>
